@@ -1,2 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Prompts, specs and design assets (local only)
 *.pdf
 *.excalidraw
+*.txt
+master_instructions.txt
+
+# OS and IDE files
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# Supabase local temp
+.branches/
+.temp/

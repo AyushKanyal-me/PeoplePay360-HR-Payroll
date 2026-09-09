@@ -1,0 +1,524 @@
+{
+  "info": {
+    "name": "PeoplePay360 REST API Collection",
+    "_postman_id": "peoplepay360-api-collection-v1",
+    "description": "Comprehensive Postman/Bruno collection for the complete PeoplePay360 HR & Payroll REST API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{ACCESS_TOKEN}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:4000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "ACCESS_TOKEN",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/health",
+          "host": ["{{BASE_URL}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Get Current User Profile (/auth/me)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/auth/me",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "List Companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/companies",
+              "host": ["{{BASE_URL}}"],
+              "path": ["companies"]
+            }
+          }
+        },
+        {
+          "name": "Update Company",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"PeoplePay360 Global\",\n  \"currency\": \"INR\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/companies/{{companyId}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["companies", "{{companyId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Departments",
+      "item": [
+        {
+          "name": "List Departments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/departments",
+              "host": ["{{BASE_URL}}"],
+              "path": ["departments"]
+            }
+          }
+        },
+        {
+          "name": "Create Department",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Engineering\",\n  \"code\": \"ENG\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/departments",
+              "host": ["{{BASE_URL}}"],
+              "path": ["departments"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Employees",
+      "item": [
+        {
+          "name": "List Employees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/employees?page=1&limit=20",
+              "host": ["{{BASE_URL}}"],
+              "path": ["employees"]
+            }
+          }
+        },
+        {
+          "name": "Get Employee by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/employees/{{employeeId}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["employees", "{{employeeId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Employee Smart Counts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/employees/{{employeeId}}/smart-counts",
+              "host": ["{{BASE_URL}}"],
+              "path": ["employees", "{{employeeId}}", "smart-counts"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contracts",
+      "item": [
+        {
+          "name": "List Contracts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/contracts",
+              "host": ["{{BASE_URL}}"],
+              "path": ["contracts"]
+            }
+          }
+        },
+        {
+          "name": "Create Contract",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"start_date\": \"2026-09-01\",\n  \"wage\": 50000,\n  \"salary_structure_id\": \"{{structureId}}\",\n  \"status\": \"ACTIVE\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/contracts",
+              "host": ["{{BASE_URL}}"],
+              "path": ["contracts"]
+            }
+          }
+        },
+        {
+          "name": "Close Contract",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end_date\": \"2026-09-30\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/contracts/{{contractId}}/close",
+              "host": ["{{BASE_URL}}"],
+              "path": ["contracts", "{{contractId}}", "close"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance",
+      "item": [
+        {
+          "name": "Quick Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/attendance/quick-status",
+              "host": ["{{BASE_URL}}"],
+              "path": ["attendance", "quick-status"]
+            }
+          }
+        },
+        {
+          "name": "Check-In",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/attendance/check-in",
+              "host": ["{{BASE_URL}}"],
+              "path": ["attendance", "check-in"]
+            }
+          }
+        },
+        {
+          "name": "Check-Out",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/attendance/check-out",
+              "host": ["{{BASE_URL}}"],
+              "path": ["attendance", "check-out"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Time Off",
+      "item": [
+        {
+          "name": "List Time Off Types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/time-off/types",
+              "host": ["{{BASE_URL}}"],
+              "path": ["time-off", "types"]
+            }
+          }
+        },
+        {
+          "name": "Submit Leave Request",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"time_off_type_id\": \"{{timeOffTypeId}}\",\n  \"start_date\": \"2026-09-15\",\n  \"end_date\": \"2026-09-16\",\n  \"reason\": \"Personal work\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/time-off/requests",
+              "host": ["{{BASE_URL}}"],
+              "path": ["time-off", "requests"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Salary Structures & Rules",
+      "item": [
+        {
+          "name": "List Salary Structures",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/salary-structures",
+              "host": ["{{BASE_URL}}"],
+              "path": ["salary-structures"]
+            }
+          }
+        },
+        {
+          "name": "List Salary Rules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/salary-rules",
+              "host": ["{{BASE_URL}}"],
+              "path": ["salary-rules"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payruns & Payroll Engine",
+      "item": [
+        {
+          "name": "List Payruns",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/payruns",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payruns"]
+            }
+          }
+        },
+        {
+          "name": "Create Payrun (DRAFT)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"September 2026 Payroll\",\n  \"period_start\": \"2026-09-01\",\n  \"period_end\": \"2026-09-30\",\n  \"salary_structure_id\": \"{{structureId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/payruns",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payruns"]
+            }
+          }
+        },
+        {
+          "name": "Compute Payrun",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/payruns/{{payrunId}}/compute",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payruns", "{{payrunId}}", "compute"]
+            }
+          }
+        },
+        {
+          "name": "Validate Payrun",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/payruns/{{payrunId}}/validate",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payruns", "{{payrunId}}", "validate"]
+            }
+          }
+        },
+        {
+          "name": "Mark Payrun Paid",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/payruns/{{payrunId}}/mark-paid",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payruns", "{{payrunId}}", "mark-paid"]
+            }
+          }
+        },
+        {
+          "name": "Send Payrun Payslips",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/payruns/{{payrunId}}/send-payslips",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payruns", "{{payrunId}}", "send-payslips"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payslips",
+      "item": [
+        {
+          "name": "List Payslips",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/payslips",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payslips"]
+            }
+          }
+        },
+        {
+          "name": "Get Payslip Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/payslips/{{payslipId}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payslips", "{{payslipId}}"]
+            }
+          }
+        },
+        {
+          "name": "Download PDF Payslip",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/payslips/{{payslipId}}/pdf",
+              "host": ["{{BASE_URL}}"],
+              "path": ["payslips", "{{payslipId}}", "pdf"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard & Analytics",
+      "item": [
+        {
+          "name": "Get KPIs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/dashboard/kpis",
+              "host": ["{{BASE_URL}}"],
+              "path": ["dashboard", "kpis"]
+            }
+          }
+        },
+        {
+          "name": "Salary by Department",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/dashboard/salary-by-dept",
+              "host": ["{{BASE_URL}}"],
+              "path": ["dashboard", "salary-by-dept"]
+            }
+          }
+        },
+        {
+          "name": "Salary Trends",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/dashboard/salary-trends",
+              "host": ["{{BASE_URL}}"],
+              "path": ["dashboard", "salary-trends"]
+            }
+          }
+        },
+        {
+          "name": "Attendance Overview",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/dashboard/attendance-overview",
+              "host": ["{{BASE_URL}}"],
+              "path": ["dashboard", "attendance-overview"]
+            }
+          }
+        },
+        {
+          "name": "Operational Alerts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/dashboard/operational-alerts",
+              "host": ["{{BASE_URL}}"],
+              "path": ["dashboard", "operational-alerts"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audit Logs",
+      "item": [
+        {
+          "name": "List Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/audit-logs?page=1&limit=20",
+              "host": ["{{BASE_URL}}"],
+              "path": ["audit-logs"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
